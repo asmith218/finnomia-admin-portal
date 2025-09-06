@@ -1,0 +1,114 @@
+.system-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.page-header h1 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.last-updated {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.refresh-button, .retry-button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.refresh-button:hover, .retry-button:hover {
+  background: #2980b9;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.metric-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #ecf0f1;
+}
+
+.metric-card h3 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.metric-value .value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ecf0f1;
+  border-radius: 4px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.disk-details {
+  margin-top: 8px;
+}
+
+.disk-details small {
+  color: #7f8c8d;
+}
+
+.metric-label {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.loading, .error, .no-data {
+  text-align: center;
+  padding: 40px;
+  color: #7f8c8d;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
