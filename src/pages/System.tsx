@@ -91,14 +91,14 @@ const System: React.FC = () => {
         <div className="metric-card">
           <h3>CPU Usage</h3>
           <div className="metric-value">
-            <span className="value">{system_metrics.cpu_usage.toFixed(1)}%</span>
+            <span className="value">{system_metrics?.cpu_usage?.toFixed(1) || '0.0'}%</span>
             <div className="progress-bar">
               <div 
                 className="progress-fill" 
                 style={{ 
-                  width: `${system_metrics.cpu_usage}%`,
-                  backgroundColor: system_metrics.cpu_usage > 80 ? '#e74c3c' : 
-                                 system_metrics.cpu_usage > 60 ? '#f39c12' : '#27ae60'
+                  width: `${system_metrics?.cpu_usage || 0}%`,
+                  backgroundColor: (system_metrics?.cpu_usage || 0) > 80 ? '#e74c3c' : 
+                                 (system_metrics?.cpu_usage || 0) > 60 ? '#f39c12' : '#27ae60'
                 }}
               ></div>
             </div>
@@ -108,14 +108,14 @@ const System: React.FC = () => {
         <div className="metric-card">
           <h3>Memory Usage</h3>
           <div className="metric-value">
-            <span className="value">{system_metrics.memory_usage.toFixed(1)}%</span>
+            <span className="value">{system_metrics?.memory_usage?.toFixed(1) || '0.0'}%</span>
             <div className="progress-bar">
               <div 
                 className="progress-fill" 
                 style={{ 
-                  width: `${system_metrics.memory_usage}%`,
-                  backgroundColor: system_metrics.memory_usage > 80 ? '#e74c3c' : 
-                                 system_metrics.memory_usage > 60 ? '#f39c12' : '#27ae60'
+                  width: `${system_metrics?.memory_usage || 0}%`,
+                  backgroundColor: (system_metrics?.memory_usage || 0) > 80 ? '#e74c3c' : 
+                                 (system_metrics?.memory_usage || 0) > 60 ? '#f39c12' : '#27ae60'
                 }}
               ></div>
             </div>
@@ -125,21 +125,21 @@ const System: React.FC = () => {
         <div className="metric-card">
           <h3>Disk Usage</h3>
           <div className="metric-value">
-            <span className="value">{system_metrics.disk_usage.percentage.toFixed(1)}%</span>
+            <span className="value">{system_metrics?.disk_usage?.percentage?.toFixed(1) || '0.0'}%</span>
             <div className="progress-bar">
               <div 
                 className="progress-fill" 
                 style={{ 
-                  width: `${system_metrics.disk_usage.percentage}%`,
-                  backgroundColor: system_metrics.disk_usage.percentage > 80 ? '#e74c3c' : 
-                                 system_metrics.disk_usage.percentage > 60 ? '#f39c12' : '#27ae60'
+                  width: `${system_metrics?.disk_usage?.percentage || 0}%`,
+                  backgroundColor: (system_metrics?.disk_usage?.percentage || 0) > 80 ? '#e74c3c' : 
+                                 (system_metrics?.disk_usage?.percentage || 0) > 60 ? '#f39c12' : '#27ae60'
                 }}
               ></div>
             </div>
             <div className="disk-details">
               <small>
-                Used: {(system_metrics.disk_usage.used / (1024**3)).toFixed(1)} GB / 
-                Total: {(system_metrics.disk_usage.total / (1024**3)).toFixed(1)} GB
+                Used: {((system_metrics?.disk_usage?.used || 0) / (1024**3)).toFixed(1)} GB / 
+                Total: {((system_metrics?.disk_usage?.total || 0) / (1024**3)).toFixed(1)} GB
               </small>
             </div>
           </div>
@@ -148,7 +148,7 @@ const System: React.FC = () => {
         <div className="metric-card">
           <h3>Network Connections</h3>
           <div className="metric-value">
-            <span className="value">{system_metrics.network_connections}</span>
+            <span className="value">{system_metrics?.network_connections || 0}</span>
             <div className="metric-label">Active connections</div>
           </div>
         </div>

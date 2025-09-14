@@ -56,6 +56,7 @@ const Dashboard: React.FC = () => {
   };
 
   const getStatusColor = (status: string) => {
+    if (!status) return '#6c757d';
     switch (status.toLowerCase()) {
       case 'healthy': return '#28a745';
       case 'unhealthy': return '#dc3545';
@@ -65,6 +66,7 @@ const Dashboard: React.FC = () => {
   };
 
   const getServiceStatusIcon = (status: string) => {
+    if (!status) return '⚪';
     switch (status.toLowerCase()) {
       case 'healthy': return '✅';
       case 'unhealthy': return '❌';
@@ -100,7 +102,7 @@ const Dashboard: React.FC = () => {
                 className="status-indicator"
                 style={{ backgroundColor: getStatusColor(healthData.overall_status) }}
               >
-                {healthData.overall_status.toUpperCase()}
+                {healthData.overall_status ? healthData.overall_status.toUpperCase() : 'UNKNOWN'}
               </div>
             </div>
 
@@ -109,15 +111,15 @@ const Dashboard: React.FC = () => {
               <div className="services-summary">
                 <div className="summary-item">
                   <span className="summary-label">Total:</span>
-                  <span className="summary-value">{healthData.services.total}</span>
+                  <span className="summary-value">{healthData.services?.total || 0}</span>
                 </div>
                 <div className="summary-item">
                   <span className="summary-label">Healthy:</span>
-                  <span className="summary-value healthy">{healthData.services.healthy}</span>
+                  <span className="summary-value healthy">{healthData.services?.healthy || 0}</span>
                 </div>
                 <div className="summary-item">
                   <span className="summary-label">Unhealthy:</span>
-                  <span className="summary-value unhealthy">{healthData.services.unhealthy}</span>
+                  <span className="summary-value unhealthy">{healthData.services?.unhealthy || 0}</span>
                 </div>
               </div>
             </div>
@@ -129,43 +131,43 @@ const Dashboard: React.FC = () => {
             <div className="metrics-grid">
               <div className="metric-card">
                 <h4>CPU Usage</h4>
-                <div className="metric-value">{healthData.system_metrics.cpu_percent.toFixed(1)}%</div>
+                <div className="metric-value">{healthData.system_metrics?.cpu_percent?.toFixed(1) || '0.0'}%</div>
                 <div className="metric-bar">
                   <div
                     className="metric-fill"
-                    style={{ width: `${healthData.system_metrics.cpu_percent}%` }}
+                    style={{ width: `${healthData.system_metrics?.cpu_percent || 0}%` }}
                   ></div>
                 </div>
               </div>
 
               <div className="metric-card">
                 <h4>Memory Usage</h4>
-                <div className="metric-value">{healthData.system_metrics.memory_percent.toFixed(1)}%</div>
+                <div className="metric-value">{healthData.system_metrics?.memory_percent?.toFixed(1) || '0.0'}%</div>
                 <div className="metric-bar">
                   <div
                     className="metric-fill"
-                    style={{ width: `${healthData.system_metrics.memory_percent}%` }}
+                    style={{ width: `${healthData.system_metrics?.memory_percent || 0}%` }}
                   ></div>
                 </div>
               </div>
 
               <div className="metric-card">
                 <h4>Disk Usage</h4>
-                <div className="metric-value">{healthData.system_metrics.disk_usage.percent.toFixed(1)}%</div>
+                <div className="metric-value">{healthData.system_metrics?.disk_usage?.percent?.toFixed(1) || '0.0'}%</div>
                 <div className="metric-bar">
                   <div
                     className="metric-fill"
-                    style={{ width: `${healthData.system_metrics.disk_usage.percent}%` }}
+                    style={{ width: `${healthData.system_metrics?.disk_usage?.percent || 0}%` }}
                   ></div>
                 </div>
                 <div className="disk-details">
-                  {healthData.system_metrics.disk_usage.used.toFixed(1)} GB used of {healthData.system_metrics.disk_usage.total.toFixed(1)} GB
+                  {healthData.system_metrics?.disk_usage?.used?.toFixed(1) || '0.0'} GB used of {healthData.system_metrics?.disk_usage?.total?.toFixed(1) || '0.0'} GB
                 </div>
               </div>
 
               <div className="metric-card">
                 <h4>Network Connections</h4>
-                <div className="metric-value">{healthData.system_metrics.network_connections}</div>
+                <div className="metric-value">{healthData.system_metrics?.network_connections || 0}</div>
               </div>
             </div>
           </div>
@@ -174,7 +176,7 @@ const Dashboard: React.FC = () => {
           <div className="services-section">
             <h3>Services Status</h3>
             <div className="services-grid">
-              {healthData.services_detail.map((service) => (
+              {healthData.services_detail?.map((service) => (
                 <div key={service.name} className="service-card">
                   <div className="service-header">
                     <span className="service-icon">{getServiceStatusIcon(service.status)}</span>
@@ -188,7 +190,7 @@ const Dashboard: React.FC = () => {
                         className="metric-value"
                         style={{ color: getStatusColor(service.status) }}
                       >
-                        {service.status}
+                        {service.status || 'Unknown'}
                       </span>
                     </div>
 
@@ -220,7 +222,7 @@ const Dashboard: React.FC = () => {
 
           {/* Last Updated */}
           <div className="last-updated">
-            Last updated: {new Date(healthData.timestamp).toLocaleString()}
+            Last updated: {healthData.timestamp ? new Date(healthData.timestamp).toLocaleString() : 'Never'}
           </div>
         </>
       )}
