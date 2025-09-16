@@ -266,12 +266,17 @@ export const adminService = {
     Logger.info('Fetching services health data');
     
     return withRetry(async () => {
-      const response = await api.get('/admin/health/services');
+      const response = await api.get('/health');
       Logger.info('Successfully fetched services health data', {
-        servicesCount: response.data.services?.length,
-        summary: response.data.summary
+        servicesCount: response.data.services_detail?.length,
+        summary: response.data.services
       });
-      return response.data;
+      
+      // Transform the response to match expected format
+      return {
+        services: response.data.services_detail || [],
+        summary: response.data.services || {}
+      };
     }, 3, 1000);
   },
 
